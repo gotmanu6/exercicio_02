@@ -1,13 +1,12 @@
 package com.example.demo.controllers;
 
 
-import com.example.demo.models.LivroModel;
-import com.example.demo.services.LivrosService;
 import models.ProdutoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import services.ProdutoService;
 
 import java.net.URI;
 import java.util.List;
@@ -28,9 +27,9 @@ public class ProdutoController {
 
     @PostMapping
     public ResponseEntity<ProdutoModel> criarPessoa(@RequestBody ProdutoModel produtoModel) {
-        ProdutoModel requeste = ProdutoService.criarProduto(ProdutoModel);
+        ProdutoModel requeste = ProdutoService.criarProduto(produtoModel);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri()
-                .path("/{id}").buildAndExpand(ProdutoModel.getId())
+                .path("/{id}").buildAndExpand(produtoModel.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(requeste);
     }
